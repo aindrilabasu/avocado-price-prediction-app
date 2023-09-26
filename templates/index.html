@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avocado Price Prediction</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('https://cdn2.tmbi.com/TOH/Images/articles/shutterstock_205541344_750x420.jpg');
+            background-size: cover;
+
+        }
+        .card {
+            background-color: rgba(144, 238, 144, 0.9);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Avocado Price Prediction</h5>
+
+                    <form id="predictionForm" class="form" action="/predict" method="POST">
+                        <!-- Input fields -->
+                        <div class="form-group">
+                            <label for="Date">Date of observation</label>
+                            <input type="date" class="form-control" id="Date" name="Date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="4046">Number of avocados with PLU 4046 sold</label>
+                            <input type="number" class="form-control" id="4046" name="4046" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="4225">Number of avocados with PLU 4225 sold</label>
+                            <input type="number" class="form-control" id="4225" name="4225" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="4770">Number of avocados with PLU 4770 sold</label>
+                            <input type="number" class="form-control" id="4770" name="4770" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Small Bags">Number of Small Bags sold</label>
+                            <input type="number" class="form-control" id="Small Bags" name="Small Bags" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Large Bags">Number of Large Bags sold</label>
+                            <input type="number" class="form-control" id="Large Bags" name="Large Bags" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="XLarge Bags">Number of XLarge Bags sold</label>
+                            <input type="number" class="form-control" id="XLarge Bags" name="XLarge Bags" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Type of avocado</label><br>
+                            <input type="radio" id="conventional" name="type" value="conventional" required>
+                            <label for="conventional">Conventional</label><br>
+                            <input type="radio" id="organic" name="type" value="organic">
+                            <label for="organic">Organic</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="region">Region</label>
+                            <input type="text" class="form-control" id="region" name="region" required>
+                        </div>
+
+                        <!-- Predict button -->
+                        <input type="submit" value="Predict" class="btn btn-success" id="predictButton"></input>
+                    </form>
+                    <!-- Display prediction result here -->
+                    <div class="mt-4">
+                        {% if avg_price != -1 %}
+                            <h4 id="result">The average price is: {{avg_price}}</h4>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- JavaScript for handling the prediction -->
+<script>
+    // Function to check if all required fields are filled
+        function checkFormValidity() {
+            const form = document.getElementById('predictForm');
+            const submitButton = document.getElementById('predictButton');
+
+            // Check if all required fields are filled and form is valid
+            if (form.checkValidity()) {
+                submitButton.disabled = false; // Enable the button
+            } else {
+                submitButton.disabled = true; // Disable the button
+            }
+        }
+
+        // Event listener to check form validity when input fields change
+        const inputFields = document.querySelectorAll('.form-control');
+        inputFields.forEach(function (field) {
+            field.addEventListener('input', checkFormValidity);
+        });
+
+        // Handle form submission (replace with your prediction logic)
+        document.getElementById('predictForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Perform prediction (add your prediction logic here)
+            const prediction = predict(inputValues); // Replace with your prediction function
+
+            // Display the prediction result
+            document.getElementById('result').textContent = `Prediction: ${prediction}`;
+        });
+
+        // Function to handle prediction (add your prediction logic here)
+        function predict(inputValues) {
+            // Implement your prediction logic here
+            // This is a placeholder; replace with your actual prediction code
+            return '42'; // Replace with your prediction result
+        }
+    </script>
+</script>
+
+</body>
+</html>
